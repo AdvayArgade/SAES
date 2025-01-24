@@ -1,4 +1,4 @@
-#include "bitset.h"
+#include "./bitset.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,6 +60,23 @@ void substitute(Bitset *bitset){
     free(col);
 }
 
+Bitset* subByte(Bitset* bitset){
+    Bitset* sub0 = getkmsbs(bitset, 4);
+    Bitset* sub1 = getklsbs(bitset, 4);
+    substitute(sub0);
+    substitute(sub1);
+    return concat(sub0, sub1);
+}
+
+Bitset* concat(Bitset* left, Bitset* right){
+    Bitset* combined = malloc(sizeof(Bitset));
+    init(combined, left->length+right->length, left->bits);
+    combined->bits = left->bits << right->length;
+    combined->bits += right->bits;
+
+    return combined;
+}
+
 Bitset* copyBitset(Bitset *bitset){
     Bitset *newBitset = malloc(sizeof(Bitset));
     init(newBitset, bitset->length, bitset->bits);
@@ -71,5 +88,5 @@ void printBitset(Bitset *bitset){
     for (int i = 0; i < bitset->length; ++i) {
         printf("%d ", getBit(bitset, i));
     }
-    printf("\n");
+    printf("\n\n");
 }
