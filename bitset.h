@@ -18,6 +18,7 @@ void flip(unsigned short *bitset, int index, int length);
 void swapNibbles(Bitset *bitset);
 void substitute(Bitset *bitset);
 Bitset* subByte(Bitset *bitset);
+void swap2nd4thNibble(Bitset* bitset);
 Bitset* concat(Bitset* left, Bitset* right);
 Bitset* copyBitset(Bitset *bitset);
 void printBitset(Bitset *bitset);
